@@ -5,6 +5,7 @@ var Restaurant = require('../models/restaurant');
 var Activity = require('../models/activity');
 
 router.use('/api', require('./api/attractions.js'));
+router.use('/days', require('./api/days.js'))
 
 router.get('/', function(req, res, next) {
   Promise.all([

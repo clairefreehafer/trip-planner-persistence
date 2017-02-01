@@ -7,11 +7,7 @@ var Activity = require('../../models/activity');
 
 router.get('/hotels', function(req, res, next) {
 	Hotel.findAll().then(function(hotels) {
-		var hotelList = hotels;
-	}).then(function(hotelList) {
-		hotelList.forEach(function(hotel) {
-			$('#hotel-choices').append('<option>' + hotel.name + '</option>');
-		});
+		res.json(hotels);
 	});
 });
 

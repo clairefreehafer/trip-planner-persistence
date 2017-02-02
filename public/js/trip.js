@@ -33,6 +33,7 @@ var tripModule = (function () {
   // method used both internally and externally
 
   function switchTo (newCurrentDay) {
+    console.log('currentDay: ', newCurrentDay)
     if (currentDay) currentDay.hide();
     currentDay = newCurrentDay;
     currentDay.show();
@@ -84,11 +85,17 @@ var tripModule = (function () {
   var publicAPI = {
 
     load: function () {
-
+      $.get('/days')
+      .then(function (data) { 
+        for(var i = 0; i < data.length; i++) {
+          $(addDay);
+        }
+      })
+      .catch(console.error.bind(console))
+    
       // ~~~~~~~~~~~~~~~~~~~~~~~
         //If we are trying to load existing Days, then let's make a request to the server for the day. Remember this is async. For each day we get back what do we need to do to it?
       // ~~~~~~~~~~~~~~~~~~~~~~~
-      $(addDay);
     },
 
     switchTo: switchTo,

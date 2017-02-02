@@ -55,6 +55,18 @@ var dayModule = (function () {
     this.$button.on('click', function (){
       this.blur(); // removes focus box from buttons
       tripModule.switchTo(self);
+      $.get('/days/' + this.number)
+      .then(function (days) { 
+        return days.findOne({
+          where: {
+            number: self.number
+          }
+        })
+       })
+       .then (function(day) {
+         tripModule.switchTo(day);
+       })
+      .catch(console.error.bind(console));
     });
     return this;
   };

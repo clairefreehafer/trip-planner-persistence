@@ -24,18 +24,21 @@ $(function () {
     $.get('/api/hotels')
     .then(function (hotels) {
       hotels.forEach(makeOption, $hotelSelect);
+      attractionsModule.loadEnhancedAttractions('hotels', hotels);
     })
     .catch( console.error.bind(console) );
 
     $.get('/api/restaurants')
     .then(function (restaurants) {
       restaurants.forEach(makeOption, $restaurantSelect);
+      attractionsModule.loadEnhancedAttractions('restaurants', restaurants);
     })
     .catch( console.error.bind(console) );
 
     $.get('/api/activities')
     .then(function (activities) {
       activities.forEach(makeOption, $activitySelect);
+      attractionsModule.loadEnhancedAttractions('activities', activities);
     })
     .catch( console.error.bind(console) );
 
@@ -47,9 +50,9 @@ $(function () {
     // Once you've made AJAX calls to retrieve this information,
     // call attractions.loadEnhancedAttractions in the fashion
     // exampled below in order to integrate it.
-    attractionsModule.loadEnhancedAttractions('hotels', hotels);
-    attractionsModule.loadEnhancedAttractions('restaurants', restaurants);
-    attractionsModule.loadEnhancedAttractions('activities', activities);
+    // attractionsModule.loadEnhancedAttractions('hotels', hotels);
+    // attractionsModule.loadEnhancedAttractions('restaurants', restaurants);
+    
 
     function makeOption(databaseAttraction) {
         var $option = $('<option></option>') // makes a new option tag

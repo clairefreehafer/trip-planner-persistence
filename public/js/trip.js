@@ -33,7 +33,6 @@ var tripModule = (function () {
   // method used both internally and externally
 
   function switchTo (newCurrentDay) {
-    console.log('currentDay: ', newCurrentDay)
     if (currentDay) currentDay.hide();
     currentDay = newCurrentDay;
     currentDay.show();
@@ -52,9 +51,9 @@ var tripModule = (function () {
   // ~~~~~~~~~~~~~~~~~~~~~~~
     // `addDay` may need to take information now that we can persist days -- we want to display what is being sent from the DB
   // ~~~~~~~~~~~~~~~~~~~~~~~
-  function addDay () { 
+  function addDay (databaseDay) { 
     if (this && this.blur) this.blur(); // removes focus box from buttons
-    var newDay = dayModule.create({ number: days.length + 1 }); // dayModule
+    var newDay = dayModule.create(databaseDay); // dayModule
     days.push(newDay);
     if (days.length === 1) {
       currentDay = newDay;
@@ -86,9 +85,9 @@ var tripModule = (function () {
 
     load: function () {
       $.get('/days')
-      .then(function (data) { 
-        for(var i = 0; i < data.length; i++) {
-          $(addDay);
+      .then(function (arrayOfDays) { 
+        for(var i = 0; i < arrayOfDays.length; i++) {
+          $(addDay(arrayOfDays[i]));
         }
       })
       .catch(console.error.bind(console))

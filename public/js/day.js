@@ -55,18 +55,27 @@ var dayModule = (function () {
     this.$button.on('click', function (){
       this.blur(); // removes focus box from buttons
       tripModule.switchTo(self);
-      $.get('/days/' + this.number)
-      .then(function (days) { 
-        return days.findOne({
-          where: {
-            number: self.number
-          }
-        })
-       })
-       .then (function(day) {
-         tripModule.switchTo(day);
-       })
-      .catch(console.error.bind(console));
+      // $.get('/days/' + self.number)
+      //   .then(function (day) { 
+      
+      //     console.log('day: ', day);
+      //     // var daysRestaurants = Day.restaurants;
+      //     var daysActivities = day.activities;
+      //     console.log('daysActivities: ', daysActivities);
+      //     var daysHotel = day.hotel;
+      //     // for (var i = 0; i < daysRestaurants.length; i++) {
+      //     //   daysRestaurants.buildItineraryItem();
+      //     // }
+      //     for (var j = 0; j < daysActivities.length; j++) {
+      //       console.log('in activity for loop');
+      //       daysActivities.buildItineraryItem();
+      //     }
+      //   })
+      //   .then (function(day) {
+      //     tripModule.switchTo(day);
+      //     $(addDay)
+      //   })
+      //   .catch(console.error.bind(console));
     });
     return this;
   };

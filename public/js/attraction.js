@@ -30,6 +30,7 @@ var attractionModule = (function () {
 
   function Attraction (data) {
     utilsModule.merge(data, this); // copy all key-val pairs into this new obj
+    // console.log('data: ', data);
     this.buildItineraryItem().buildMarker();
   }
 
@@ -47,6 +48,7 @@ var attractionModule = (function () {
   };
 
   Attraction.prototype.buildMarker = function () {
+    // console.log("WHYYYY", this)
     this.marker = mapModule.buildAttractionMarker(this);
     return this;
   };

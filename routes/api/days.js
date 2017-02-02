@@ -8,13 +8,19 @@ var Day = require('../../models/dayModel');
 
 
 router.get('/:id', function(req, res, next) {
-	Hotel.findAll().then(function(hotels) {
-		res.json(hotels);
+	Day.findOne({
+		where: {
+			id: req.params.id
+		}
+	}).then(function(day) {
+		res.json(day);
 	});
 });
 
 router.get('/', function(req, res, next) {
-	Day.findAll()
+	Day.findAll({
+		include: [Activity, Restaurant, Hotel]
+	})
 	.then (function(days) {
 		res.send(days);
 	})
@@ -28,7 +34,7 @@ router.delete('/:id', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	Day.create(req.body).then(function(newDay) {
-		res.send('success');
+		res.json(newDay);
 	})
 });
 
